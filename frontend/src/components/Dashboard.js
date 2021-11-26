@@ -75,56 +75,77 @@ const Dashboard = () => {
                             <Grid item sx={{}} >
                                 <Card sx={{ width: 150, height: 150, }}>
                                     <Box sx={{ borderTop: '14px solid black' }} />
-                                    <Grid container sx={{height:100}} alignItems='center' justifyContent='center'>
-                                    <Typography alignItems='center'>
-                                        fff
-                                    </Typography>
+                                    <Grid container sx={{ height: 100 }} alignItems='center' justifyContent='center'>
+                                        <Typography alignItems='center'>
+                                            fff
+                                        </Typography>
                                     </Grid>
-                                    
+
 
                                 </Card>
                             </Grid>
                             <Grid item sx={{}} >
                                 <Card sx={{ width: 150, height: 150, }}>
                                     <Box sx={{ borderTop: '14px solid black' }} />
-                                    <Grid container sx={{height:100}} alignItems='center' justifyContent='center'>
-                                    <Typography alignItems='center'>
-                                        fff
-                                    </Typography>
+                                    <Grid container sx={{ height: 100 }} alignItems='center' justifyContent='center'>
+                                        <Typography alignItems='center'>
+                                            fff
+                                        </Typography>
                                     </Grid>
-                                    
+
 
                                 </Card>
                             </Grid>
                             <Grid item sx={{}} >
                                 <Card sx={{ width: 150, height: 150, }}>
                                     <Box sx={{ borderTop: '14px solid black' }} />
-                                    <Grid container sx={{height:100}} alignItems='center' justifyContent='center'>
-                                    <Typography alignItems='center'>
-                                        fff
-                                    </Typography>
+                                    <Grid container sx={{ height: 100 }} alignItems='center' justifyContent='center'>
+                                        <Typography alignItems='center'>
+                                            fff
+                                        </Typography>
                                     </Grid>
-                                    
+
 
                                 </Card>
                             </Grid>
                             <Grid item sx={{}} >
-                                <Card sx={{ width: 150, height: 150,border:'2px dashed black' }}>
-                                    <Box  />
-                                    <Grid container sx={{height:100}} alignItems='center' justifyContent='center'>
-                                    <Typography>
-                                        fff
-                                    </Typography>
+                                <Card sx={{ width: 150, height: 150, border: '2px dashed black' }}>
+                                    <Box />
+                                    <Grid container sx={{ height: 100 }} alignItems='center' justifyContent='center'>
+                                        <Typography>
+                                            fff
+                                        </Typography>
                                     </Grid>
-                                    
+
 
                                 </Card>
                             </Grid>
-                            
+
 
                         </Grid>
 
                     </Stack>
+
+                    {/* Work needs to be done below */}
+                    <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>USERS</Divider>
+                    <Stack mt={3} spacing={2}>
+                        <Grid container spacing={2} >
+                        <Grid item sx={{}} >
+                                <Card sx={{ width: 150, height: 150, }}>
+                                    <Box sx={{ borderTop: '14px solid black' }} />
+                                    <Grid container sx={{ height: 100 }} alignItems='center' justifyContent='center'>
+                                        <Typography alignItems='center'>
+                                         Heeeeeeee
+                                        </Typography>
+                                    </Grid>
+
+
+                                </Card>
+                            </Grid>
+                        </Grid>
+
+                    </Stack>
+
                 </Grid>
             </Grid>
 
