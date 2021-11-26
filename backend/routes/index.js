@@ -7,5 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 // router.post('/register',registerUser.register)
-
+router.post('/register',async(req,res)=>{
+  res.send('Register')
+})
 module.exports = router;
