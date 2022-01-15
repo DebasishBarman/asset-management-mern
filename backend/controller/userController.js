@@ -11,29 +11,36 @@ const register=async(req,res,next)=>{
       return res.status(400).json({ err: "err"});
     }
 
-    const {username,password,email}=req.body
-    bcrypt.hash(password,10,(err,hashedPassword)=>{
-        if(err){
-            res.status(401).json({
-                'err':err
-            })
-        }else{
-            const user=new User({
-                username,email,
-                password:hashedPassword
-            })
-            user.save().then((data)=>{
-                res.status(200).json({
-                    user:data,
-                    message:'Registration Successfull'
-                })
-            }).catch((err)=>{
-                res.json({
+    const {username,password,email}=req.body;
+    try{
+        bcrypt.hash(password,10,(err,hashedPassword)=>{
+            if(err){
+                res.status(401).json({
                     'err':err
+                });
+            }else{
+                const user=new User({
+                    username,email,
+                    password:hashedPassword
+                });
+                user.save().then((data)=>{
+                    res.status(200).json({
+                        user:data,
+                        message:'Registration Successfull'
+                    });
+                }).catch((err)=>{
+                    res.json({
+                        'err':err
+                    });
                 })
-            })
-        }
-    })
+            }
+        })
+    }catch(err){
+        res.json({
+            'err':err
+        });
+    }
+    
 }
 
 module.exports={register}
