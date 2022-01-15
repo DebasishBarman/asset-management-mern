@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/assetDb', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/assetManagement', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connection Successfull'))
   .catch((err)=>console.log('Error'))
 
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,13 +1,23 @@
 var express = require('express');
 var router = express.Router();
-const registerUser=require('../controller/registerUser')
+const {register}=require('../controller/userController')
+const {body,validationResult}=require('express-validator');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-// router.post('/register',registerUser.register)
-router.post('/register',async(req,res)=>{
-  res.send('Register')
-})
+//Register User
+
+router.post('/register',[
+  body('username').notEmpty().trim().escape(),
+  body('email').notEmpty().isEmail().normalizeEmail().trim(),
+  body('password').notEmpty().trim()
+],register);
+
+
+router.post('/login',[
+  body('email').notEmpty().isEmail().normalizeEmail().trim(),
+  body('password').notEmpty().trim()
+]) 
+
+
+
 module.exports = router;
