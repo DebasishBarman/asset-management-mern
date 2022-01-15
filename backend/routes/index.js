@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const {register}=require('../controller/userController')
-const {body,validationResult}=require('express-validator');
+const {register,login}=require('../controller/userController')
+const {addCategory}=require('../controller/categoryController')
+const {body}=require('express-validator');
+const protected=require('../middleware/protected');
 /* GET home page. */
 
 //Register User
@@ -13,10 +15,16 @@ router.post('/register',[
 ],register);
 
 
+//user Login
 router.post('/login',[
-  body('email').notEmpty().isEmail().normalizeEmail().trim(),
+  body('username').notEmpty().trim().escape(),
   body('password').notEmpty().trim()
-]) 
+],login) 
+
+
+//add category
+router.post('/addCategory',[body('name').notEmpty().trim().escape()
+],protected,addCategory)
 
 
 

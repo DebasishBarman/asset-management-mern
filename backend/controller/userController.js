@@ -1,7 +1,7 @@
 const bcrypt=require('bcryptjs')
-const jwt=require('jsonwebtoken');
 const User=require('../models/UserModel');
 const {validationResult}=require('express-validator')
+const generateToken=require('../utils/generateToken');
 
 
 const register=async(req,res,next)=>{
@@ -43,4 +43,40 @@ const register=async(req,res,next)=>{
     
 }
 
-module.exports={register}
+
+
+const login=async(req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ err: errors});
+    }
+
+    const {username,password}=req.body;
+    try {
+        const user=await User.findOne({username});
+        console.log(user)
+        if(user!=null){
+            const isValidPass=await bcrypt.compare(password,user.password);
+            if(isValidPass){
+                console.log(generateToken);
+                res.status(200).json({
+                    token:generateToken(username),
+                    login:'success',
+
+                })
+            }else{
+                res.json({
+                    'errs':err
+                });
+            }
+        }
+        // res.send("Not Found");
+        
+    } catch (err) {
+        res.json({
+            'errs':err
+        });
+    }
+}
+
+module.exports={register,login}
