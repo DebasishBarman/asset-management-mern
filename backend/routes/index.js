@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
+
+//controllers
 const {register,login}=require('../controller/userController')
 const {addCategory}=require('../controller/categoryController')
 const {serviceController}=require('../controller/serviceUserController')
+const {addAssetDetailController}=require('../controller/assetController')
+//third-party 
 const {body}=require('express-validator');
+
+//authentication middleware
 const protected=require('../middleware/protected');
-/* GET home page. */
+
 
 //Register User
 
@@ -33,6 +39,14 @@ router.post('/addServiceUser',[
   body('email').notEmpty().isEmail().normalizeEmail().trim()]
   ,protected,serviceController);
 
-
+//store Info of assetLogs
+router.post('/add',[
+  body('category').notEmpty().trim().escape(),
+  body('assignmentDate').notEmpty().trim(),
+  body('status').notEmpty().trim().escape(),
+  body('assignedTo').notEmpty().trim().escape(),
+  body('assetId').notEmpty().trim().escape(),
+]
+  ,protected,addAssetDetailController);
 
 module.exports = router;
