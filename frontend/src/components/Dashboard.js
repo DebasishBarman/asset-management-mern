@@ -1,16 +1,14 @@
 import React,{useState} from 'react'
 import {
-    Container, Grid, Stack, Divider, Typography,
-    Card, List, ListItem, ListItemButton, ListItemIcon, Box, Tab, Tabs
+    Container, Grid,Typography,
+    Box, Tab, Tabs
 } from '@mui/material'
 
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
+
 import PropTypes from 'prop-types';
 import PixIcon from '@mui/icons-material/Pix';
-import Categories from './Categories';
-import Users from './Users';
+import Home from './Home';
+import AssetLogs from './AssetLogs';
 
 
 
@@ -82,37 +80,10 @@ const Dashboard = (anchor) => {
                 </Grid>
 
                 <TabPanel value={value} index={0}>
-                    <Grid item lg={9}>
-                        <Stack>
-                            <Grid container mt={3}>
-                                <Grid item>
-                                    <Typography variant="subtitle" component="p" textAlign='start'>
-                                        Welcome
-                                    </Typography>
-                                    <Typography variant="h4" component="p" sx={{ color: '#fff' }}>
-                                        Hi Debasish
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-
-                        </Stack>
-                        <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>CATEGORIES</Divider>
-
-                        {/* Categories Stack */}
-                        <Stack mt={3} spacing={2}>
-                            <Categories/>
-                        </Stack>
-
-                        {/* Work needs to be done below */}
-                        <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>USERS</Divider>
-                        <Stack mt={3} spacing={2}>
-                            <Users/>
-                        </Stack>
-
-                    </Grid>
+                    <Home/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Item Two
+                   <AssetLogs/>
                 </TabPanel>
 
 
