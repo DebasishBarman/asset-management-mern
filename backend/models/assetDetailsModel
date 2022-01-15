@@ -1,0 +1,29 @@
+const mongoose=require('mongoose');
+const serviceSchema=new mongoose.Schema({
+    assignedTo:{
+        type:String,
+        required:true,
+    },
+    assetName:{
+        type:String,
+        unique:true,
+        required:true,
+        max:50
+    },
+    assetId:{
+        type:String,
+        required:true,
+    },
+    assignedOn:{
+        type:Date,
+        required:true
+    },
+    assetStatus:{
+        type:String,
+        required:true
+    }
+})
+const ServiceUser=new mongoose.model('Category',serviceSchema);
+module.exports=ServiceUser;
+
+
