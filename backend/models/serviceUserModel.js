@@ -1,20 +1,20 @@
 const mongoose=require('mongoose');
-const categorySchema=new mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true,
-        ref:'users'
-    },
-    assetName:{
+const serviceSchema=new mongoose.Schema({
+    email:{
         type:String,
         unique:true,
         required:true,
         max:50
 
     },
-    assetId:{
+    userName:{
         type:String,
-        unique:true,
+        required:true,
+        
+    },
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'users',
         required:true
     },
     createdOn:{
@@ -22,7 +22,7 @@ const categorySchema=new mongoose.Schema({
         default:Date.now
     }
 })
-const Category=new mongoose.model('Category',categorySchema);
-module.exports=Category;
+const ServiceUser=new mongoose.model('ServiceUser',serviceSchema);
+module.exports=ServiceUser;
 
 
