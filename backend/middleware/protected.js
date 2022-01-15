@@ -8,11 +8,12 @@ const protected=async(req,res,next)=>{
         try {
             token=authorization.split(' ')[1];
             const decoded=jwt.verify(token,'secretKey');
-            req.user=await User.findOne(decoded.id).select('-password')
+            req.user=await User.findOne({username:decoded.id}).select('-password')
             next();
         } catch (err) {
+            console.log(err);
             res.status(401).json({
-                'message': error
+                'message': err
             })
         }
     }
