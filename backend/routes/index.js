@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const {register,login}=require('../controller/userController')
 const {addCategory}=require('../controller/categoryController')
+const {serviceController}=require('../controller/serviceUserController')
 const {body}=require('express-validator');
 const protected=require('../middleware/protected');
 /* GET home page. */
@@ -25,6 +26,12 @@ router.post('/login',[
 //add category
 router.post('/addCategory',[body('name').notEmpty().trim().escape()
 ],protected,addCategory)
+
+//Add Service Users
+router.post('/addServiceUser',[
+  body('username').notEmpty().trim().escape(),
+  body('email').notEmpty().isEmail().normalizeEmail().trim()]
+  ,protected,serviceController);
 
 
 
