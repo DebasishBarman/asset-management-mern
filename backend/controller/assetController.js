@@ -1,10 +1,12 @@
-const AssetDetail=require('../models/assetDetailsModel')
+const AssetDetail=require('../models/assetDetailsModel');
 const addAssetDetailController=async(req,res)=>{
     const{category,assignmentDate,status,assignedTo,assetId}=req.body
     const user=req.user._id
+    console.log("I am AssetController");
     try{
-       
-        const asset=new AssetDetail({
+        
+        console.log(AssetDetail);
+        const assetDetail=new AssetDetail({
             assignedTo,
             assetName:category,
             assetId,
@@ -13,10 +15,10 @@ const addAssetDetailController=async(req,res)=>{
             assetStatus:status
         })
         
-        const createdAssetDetail=await asset.save();
+        const createdAssetDetail=await assetDetail.save();
         if(createdAssetDetail){
             res.status(200).json({
-                asset:createdAsset,
+                asset:createdAssetDetail,
                 "message":'success'
             });
         }else{
@@ -25,6 +27,7 @@ const addAssetDetailController=async(req,res)=>{
             })
         }
     }catch(err){
+        console.log(err);
         res.status(401).json({
             'message': 'Exists'
         })

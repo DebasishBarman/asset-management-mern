@@ -40,7 +40,7 @@ router.post('/addServiceUser',[
   ,protected,serviceController);
 
 //store Info of assetLogs
-router.post('/add',[
+router.post('/addAssetInfo',[
   body('category').notEmpty().trim().escape(),
   body('assignmentDate').notEmpty().trim(),
   body('status').notEmpty().trim().escape(),

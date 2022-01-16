@@ -6,16 +6,15 @@ const assetSchema=new mongoose.Schema({
     },
     assetName:{
         type:String,
-        unique:true,
         required:true,
-        max:50
+        // max:50
     },
     assetId:{
         type:String,
         required:true,
     },
     assignedOn:{
-        type:Date,
+        type:String,
         required:true
     },
     assignedBy:{
