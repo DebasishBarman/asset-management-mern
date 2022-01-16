@@ -29,9 +29,9 @@ router.post('/login',[
 ],login) 
 
 
-//add category
-router.post('/addCategory',[body('name').notEmpty().trim().escape()
-],protected,addCategory)
+// //add category
+// router.post('/addCategory',[body('name').notEmpty().trim().escape()
+// ],protected,addCategory)
 
 //Add Service Users
 router.post('/addServiceUser',[

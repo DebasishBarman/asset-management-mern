@@ -5,8 +5,7 @@ const addAssetDetailController=async(req,res)=>{
     console.log("I am AssetController");
     try{
         
-        console.log(AssetDetail);
-        const assetDetail=new AssetDetail({
+        const duplicate=await AssetDetail.findOne({
             assignedTo,
             assetName:category,
             assetId,
@@ -14,20 +13,31 @@ const addAssetDetailController=async(req,res)=>{
             assignedBy:user,
             assetStatus:status
         })
-        
-        const createdAssetDetail=await assetDetail.save();
-        if(createdAssetDetail){
-            res.status(200).json({
-                asset:createdAssetDetail,
-                "message":'success'
-            });
-        }else{
+
+       
+        if(duplicate){
             res.status(401).json({
-                'message': 'er'
+                'message': 'Exists'
             })
+        }else{
+            const assetDetail=new AssetDetail({
+                assignedTo,
+                assetName:category,
+                assetId,
+                assignedOn:assignmentDate,
+                assignedBy:user,
+                assetStatus:status
+            })
+            
+            const detail=await assetDetail.save();
+            if(detail){
+                res.status(200).json({
+                    assetDetail:detail,
+                    "message":'success'
+                });
+            }
         }
     }catch(err){
-        console.log(err);
         res.status(401).json({
             'message': 'Exists'
         })
