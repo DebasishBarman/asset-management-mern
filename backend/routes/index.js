@@ -3,8 +3,8 @@ var router = express.Router();
 
 //controllers
 const {register,login}=require('../controller/userController')
-const {addCategory}=require('../controller/categoryController')
-const {serviceController}=require('../controller/serviceUserController')
+const {addCategory,allCategory}=require('../controller/categoryController')
+const {serviceController,serviceUsers}=require('../controller/serviceUserController')
 const {addAssetDetailController}=require('../controller/assetController')
 //third-party 
 const {body}=require('express-validator');
@@ -29,15 +29,24 @@ router.post('/login',[
 ],login) 
 
 
-// //add category
-// router.post('/addCategory',[body('name').notEmpty().trim().escape()
-// ],protected,addCategory)
+
+
+//add category
+router.post('/addCategory',[body('name').notEmpty().trim().escape()
+],protected,addCategory)
+
+router.get('/categories',protected,allCategory)
+
 
 //Add Service Users
 router.post('/addServiceUser',[
   body('username').notEmpty().trim().escape(),
   body('email').notEmpty().isEmail().normalizeEmail().trim()]
   ,protected,serviceController);
+
+//service Users
+router.get('/serviceUsers',protected,serviceUsers)
+
 
 //store Info of assetLogs
 router.post('/addAssetInfo',[

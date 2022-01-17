@@ -1,14 +1,32 @@
 import React,{useState} from 'react'
 import { Container, Grid, Stack, Button, Typography, TextField, Box } from '@mui/material'
+import axios from 'axios'
+import {useNavigate } from "react-router";
 const Login = () => {
     const [user,setUser]=useState({
         username:'',
         password:''
     })
-    const loginHandler=(e)=>{
+
+    const navigate=useNavigate();
+
+    const loginHandler=async(e)=>{
         e.preventDefault();
-        console.log(user)
-        
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            const {data}=await axios.post('http://localhost:3001/login',{username:user.username,password:user.password},config)
+            if(data){
+                localStorage.setItem('userLogin',JSON.stringify(data));
+                navigate('/dashboard',{replace:false})
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const handleLogin=(e)=>{

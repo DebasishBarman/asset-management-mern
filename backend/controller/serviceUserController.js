@@ -29,4 +29,11 @@ const serviceController=async(req,res)=>{
     }
     
 }
-module.exports={serviceController}
+
+const serviceUsers=async(req,res)=>{
+    const user=req.user._id;
+    const users=await ServiceUser.find({createdBy:user});
+    res.json(users);
+}
+
+module.exports={serviceController,serviceUsers}
