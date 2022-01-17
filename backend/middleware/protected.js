@@ -11,7 +11,7 @@ const protected=async(req,res,next)=>{
             req.user=await User.findOne({username:decoded.id}).select('-password')
             next();
         } catch (err) {
-            console.log(err);
+
             res.status(401).json({
                 'message': err
             })

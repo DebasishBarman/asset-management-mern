@@ -2,7 +2,7 @@ const AssetDetail=require('../models/assetDetailsModel');
 const addAssetDetailController=async(req,res)=>{
     const{category,assignmentDate,status,assignedTo,assetId}=req.body
     const user=req.user._id
-    console.log("I am AssetController");
+
     try{
         
         const duplicate=await AssetDetail.findOne({

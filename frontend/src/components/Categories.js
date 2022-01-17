@@ -65,7 +65,7 @@ const Categories = () => {
   useEffect(() => {
     try {
       if (userInfo) {
-        // console.log(userInfo);
+
       }
 
       const data = async () => {
@@ -73,7 +73,7 @@ const Categories = () => {
           "http://localhost:3001/categories",
           config
         );
-        // console.log(data);
+
 
         setCategories(
           data.map((e) => {
@@ -96,7 +96,7 @@ const Categories = () => {
   };
 
   const handleCategory = async (e) => {
-    console.log(name);
+
     if (name != " ") {
       try {
         const { data } = await axios.post(
@@ -104,7 +104,7 @@ const Categories = () => {
           { name: name },
           config
         );
-        // console.log(data);
+
       } catch (error) {}
     }
   };
@@ -132,7 +132,7 @@ const Categories = () => {
   const [assigned,setAssigned]=useState("")
   const [date,setDate]=useState("")
   const saveAssetInfo=async()=>{
-    // console.log(age,assetId,assetName,date,assigned)
+
     try{
         const assetData={
           category:assetName,
@@ -142,7 +142,7 @@ const Categories = () => {
           assetId:assetId
         }
         const {data}=await axios.post('http://localhost:3001/addAssetInfo',assetData,config)
-      console.log(data)
+
 
     }catch (e) {
 
@@ -197,30 +197,7 @@ const Categories = () => {
             >
               <Typography>Add new Categories</Typography>
             </Grid>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="p" component="p">
-                  Add New Category
-                </Typography>
-                <Grid items p={2} lg={12}>
-                  <TextField
-                    label="Category Name"
-                    variant="standard"
-                    name="category"
-                    onChange={(e) => setCategoryName(e.target.value)}
-                    value={name}
-                    fullWidth
-                  />
-                </Grid>
-                <Button onClick={handleCategory}>Save </Button>
-                <Button onClick={handleClose}>Cancel</Button>
-              </Box>
-            </Modal>
+
           </Card>
         </Grid>
       </Grid>
@@ -298,6 +275,30 @@ const Categories = () => {
           </Box>
         </Drawer>
       </React.Fragment>
+      <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="p" component="p">
+            Add New Category
+          </Typography>
+          <Grid items p={2} lg={12}>
+            <TextField
+                label="Category Name"
+                variant="standard"
+                name="category"
+                onChange={(e) => setCategoryName(e.target.value)}
+                value={name}
+                fullWidth
+            />
+          </Grid>
+          <Button onClick={handleCategory}>Save </Button>
+          <Button onClick={handleClose}>Cancel</Button>
+        </Box>
+      </Modal>
     </>
   );
 };

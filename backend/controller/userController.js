@@ -5,10 +5,10 @@ const generateToken=require('../utils/generateToken');
 
 
 const register=async(req,res,next)=>{
-    console.log(req.body)
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors)
+
       return res.status(400).json({ err: "err"});
     }
 
@@ -55,11 +55,11 @@ const login=async(req,res)=>{
     const {username,password}=req.body;
     try {
         const user=await User.findOne({username});
-        console.log(user)
+
         if(user!=null){
             const isValidPass=await bcrypt.compare(password,user.password);
             if(isValidPass){
-                console.log(generateToken);
+
                 res.status(200).json({
                     token:generateToken(username),
                     login:'success',

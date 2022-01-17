@@ -34,7 +34,7 @@ const SignUp = () => {
                 email:user.email,
                 password: user.password
             }
-            console.log(registerData)
+
             const config={
                 headers:{
                     "Content-Type": "application/json"

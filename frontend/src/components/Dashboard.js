@@ -98,9 +98,6 @@ const Dashboard = (anchor) => {
                         navigate('/',{replace:true})
                         )}
 
-                    <TabPanel value={value} index={1}>
-                        <AssetLogs/>
-                    </TabPanel>
                     <TabPanel index={value} value={2}>
                         {value===2 && navigate('/',{replace:true})}
                         {value===2 && localStorage.removeItem('userLogin')}

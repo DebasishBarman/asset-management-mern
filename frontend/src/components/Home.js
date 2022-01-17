@@ -44,7 +44,7 @@ const Home = () => {
                         </Stack>
 
                         {/* Work needs to be done below */}
-                        <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>USERS</Divider>
+                        <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>SERVICE USER</Divider>
                         <Stack mt={3} spacing={2}>
                             <Users/>
                         </Stack>
