@@ -152,7 +152,7 @@ const Categories = () => {
 
   return (
     <>
-      <Grid container  spacing={2}>
+      <Grid container  spacing={1}>
         {categories &&
           categories.map((category) => {
             return (

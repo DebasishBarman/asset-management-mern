@@ -49,7 +49,7 @@ function a11yProps(index) {
 
 const Dashboard = (anchor) => {
     const [value, setValue] = React.useState(0);
-
+    const navigate=useNavigate();
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -82,15 +82,33 @@ const Dashboard = (anchor) => {
                         </nav>
                     </Container>
                 </Grid>
-                <TabPanel value={value} index={0}>
-                    <Home/>
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <AssetLogs/>
-                </TabPanel>
-                <TabPanel index={value} value={2}>
-                    {/*{value===2 && localStorage.removeItem('userLogin') && navigate('/',{replace:false})}*/}
-                </TabPanel>
+                <Grid item lg={9}>
+                    {localStorage.getItem('userLogin')?(
+                        <TabPanel value={value} index={0}>
+                        <Home/>
+                        </TabPanel>
+                        ):(
+                        navigate('/',{replace:true})
+                        )}
+                    {localStorage.getItem('userLogin')?(
+                        <TabPanel value={value} index={1}>
+                        <AssetLogs/>
+                        </TabPanel>
+                        ):(
+                        navigate('/',{replace:true})
+                        )}
+
+                    <TabPanel value={value} index={1}>
+                        <AssetLogs/>
+                    </TabPanel>
+                    <TabPanel index={value} value={2}>
+                        {value===2 && navigate('/',{replace:true})}
+                        {value===2 && localStorage.removeItem('userLogin')}
+
+                    </TabPanel>
+                </Grid>
+
+
             </Grid>
         </div>
     )

@@ -7,11 +7,17 @@ import Categories from './Categories';
 import Users from './Users';
 
 const Home = () => {
+    const userInfo = localStorage.getItem("userLogin")
+        ? JSON.parse(localStorage.getItem("userLogin"))
+        : null;
+
+    console.log(userInfo)
+
     return (
         <>
-        <Grid item lg={9}>
+        <Grid item lg={12}>
                         <Stack>
-                            <Grid container mt={3}>
+                            <Grid container mt={1}>
                                 <Grid item>
                                     <Typography variant="subtitle" component="p" textAlign='start'>
                                         Welcome
@@ -35,7 +41,6 @@ const Home = () => {
                         <Stack mt={3} spacing={2}>
                             <Users/>
                         </Stack>
-
                     </Grid>
             
         </>
