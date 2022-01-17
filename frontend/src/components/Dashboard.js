@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
+import React, {useState} from 'react'
 import {
-    Container, Grid,Typography,
+    Container, Grid, Typography,
     Box, Tab, Tabs
 } from '@mui/material'
 
@@ -9,11 +9,11 @@ import PropTypes from 'prop-types';
 import PixIcon from '@mui/icons-material/Pix';
 import Home from './Home';
 import AssetLogs from './AssetLogs';
-
-
+import {useNavigate} from "react-router";
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
+
 
     return (
         <div
@@ -23,8 +23,10 @@ function TabPanel(props) {
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
         >
+
+            }
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{p: 3}}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -40,23 +42,23 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
     return {
-      id: `vertical-tab-${index}`,
+        id: `vertical-tab-${index}`,
     };
-  }
-  
+}
+
 
 const Dashboard = (anchor) => {
     const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
-        <div style={{ background: '#1D3557' }} >
-            <Grid container lg={12}>
-                <Grid item lg={3} sx={{ minHeight: '100vh' }}>
-                    <Container sx={{ p: 2, height: '100%' }}>
+        <div style={{background: '#1D3557'}}>
+            <Grid container lg={12} sx={{border:'red'}}>
+                <Grid item lg={3} sx={{minHeight: '100vh'}}>
+                    <Container sx={{p: 2, height: '100%'}}>
                         <nav
                             style={{
                                 border: '1px solid black',
@@ -64,31 +66,32 @@ const Dashboard = (anchor) => {
                                 borderRadius: 10, padding: 3, margin: 2
                             }}
                         >
-
                             <Tabs
                                 orientation="vertical"
                                 value={value}
                                 onChange={handleChange}
-                                sx={{ borderRight: 1, borderColor: 'divider' }}
+                                sx={{borderRight: 1, borderColor: 'divider'}}
                             >
-                                <Tab label="Categories" icon={<PixIcon />} iconPosition='start' sx={{textAlign:'start'}} {...a11yProps(0)}></Tab>
-                                <Tab label="Asset Logs" icon={<PixIcon />} iconPosition='start' sx={{textAlign:'start'}} {...a11yProps(1)} />
-                                <Tab label="LogOut" icon={<PixIcon />} iconPosition='start' sx={{textAlign:'start'}} {...a11yProps(2)} />
+                                <Tab label="Categories" icon={<PixIcon/>} iconPosition='start'
+                                     sx={{textAlign: 'start'}} {...a11yProps(0)}></Tab>
+                                <Tab label="Asset Logs" icon={<PixIcon/>} iconPosition='start'
+                                     sx={{textAlign: 'start'}} {...a11yProps(1)} />
+                                <Tab label="LogOut" icon={<PixIcon/>} iconPosition='start'
+                                     sx={{textAlign: 'start'}} {...a11yProps(2)} />
                             </Tabs>
                         </nav>
                     </Container>
                 </Grid>
-
                 <TabPanel value={value} index={0}>
                     <Home/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                   <AssetLogs/>
+                    <AssetLogs/>
                 </TabPanel>
-
-
+                <TabPanel index={value} value={2}>
+                    {/*{value===2 && localStorage.removeItem('userLogin') && navigate('/',{replace:false})}*/}
+                </TabPanel>
             </Grid>
-
         </div>
     )
 }

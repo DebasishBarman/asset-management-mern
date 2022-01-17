@@ -22,7 +22,7 @@ const Login = () => {
             const {data}=await axios.post('http://localhost:3001/login',{username:user.username,password:user.password},config)
             if(data){
                 localStorage.setItem('userLogin',JSON.stringify(data));
-                navigate('/dashboard',{replace:false})
+                navigate('/dashboard',{replace:true})
             }
         } catch (err) {
             console.log(err);

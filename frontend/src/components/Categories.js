@@ -21,7 +21,7 @@ import {
   Autocomplete,
   Modal,
 } from "@mui/material";
-
+import {useNavigate } from "react-router";
 const Categories = () => {
   const style = {
     position: "absolute",
@@ -35,6 +35,7 @@ const Categories = () => {
     p: 4,
   };
 
+  const navigate=useNavigate();
   const [state, setState] = React.useState({ right: false });
   const [assetName, setAssetName] = useState("");
   const [assetId, setAssetId] = useState("");
@@ -45,11 +46,15 @@ const Categories = () => {
 
 
   //for modal
-  const [name, setCategoryName] = useState("");
+  let [name, setCategoryName] = useState("");
 
   const userInfo = localStorage.getItem("userLogin")
     ? JSON.parse(localStorage.getItem("userLogin"))
     : null;
+
+  if(userInfo===null){
+    navigate('/',{replace:true})
+  }
   let token = userInfo.token;
   const config = {
     headers: {
@@ -60,7 +65,7 @@ const Categories = () => {
   useEffect(() => {
     try {
       if (userInfo) {
-        console.log(userInfo);
+        // console.log(userInfo);
       }
 
       const data = async () => {
@@ -68,7 +73,7 @@ const Categories = () => {
           "http://localhost:3001/categories",
           config
         );
-        console.log(data);
+        // console.log(data);
 
         setCategories(
           data.map((e) => {
@@ -99,7 +104,7 @@ const Categories = () => {
           { name: name },
           config
         );
-        console.log(data);
+        // console.log(data);
       } catch (error) {}
     }
   };
@@ -114,9 +119,6 @@ const Categories = () => {
     setAssetId(assetID);
     setAssetName(assetName);
     setState({ state, [anchor]: open });
-    
-
-
   };
 
   //for Modal
@@ -124,9 +126,33 @@ const Categories = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  //drawer form
+
+
+  const [assigned,setAssigned]=useState("")
+  const [date,setDate]=useState("")
+  const saveAssetInfo=async()=>{
+    // console.log(age,assetId,assetName,date,assigned)
+    try{
+        const assetData={
+          category:assetName,
+          assignmentDate:date,
+          status:age,
+          assignedTo:assigned,
+          assetId:assetId
+        }
+        const {data}=await axios.post('http://localhost:3001/addAssetInfo',assetData,config)
+      console.log(data)
+
+    }catch (e) {
+
+    }
+  }
+
+
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container  spacing={2}>
         {categories &&
           categories.map((category) => {
             return (
@@ -140,7 +166,7 @@ const Categories = () => {
                     category.assetId
                   )}
                 >
-                  <Box sx={{ borderTop: "14px solid black" }} />
+                  <Box sx={{ borderTop: "14px solid yellow" }} />
                   <Grid
                     container
                     sx={{ height: 100 }}
@@ -233,6 +259,7 @@ const Categories = () => {
                   type="date"
                   variant="outlined"
                   // label='Date'
+                    onChange={(e) => setDate(e.target.value)}
                   fullWidth
                 />
               </Grid>
@@ -256,26 +283,16 @@ const Categories = () => {
               </Grid>
               <Grid items p={2} lg={12}>
                 <Autocomplete
-                  multiple
-                  id="tags-outlined"
-                  options={serviceUser}
-                  getOptionLabel={(option) => option.userName}
-                  
-                  filterSelectedOptions
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Asset Assigned To"
-                      placeholder="Add More"
-                    />
-                  )}
+                    options={serviceUser.map((option) => option.userName)} onChange={(e,value) => setAssigned(value)}
+                    renderInput={(params) => <TextField {...params} label="Asset Assigned To"  />}
                 />
+
               </Grid>
               <Grid item  p={2} lg={6}>
-                    <Button contained>Save</Button>
+                    <Button variant="contained" onClick={saveAssetInfo}>Save</Button>
               </Grid>
               <Grid item p={2} lg={6}>
-                    <Button>Discard</Button>
+                    <Button variant="contained">Discard</Button>
               </Grid>
             </Grid>
           </Box>

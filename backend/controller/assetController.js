@@ -44,4 +44,10 @@ const addAssetDetailController=async(req,res)=>{
     }
     
 }
-module.exports={addAssetDetailController}
+
+const displayList=async(req,res)=>{
+    const user=req.user._id;
+    const assets=await AssetDetail.find({assignedBy:user})
+    res.json(assets)
+}
+module.exports={addAssetDetailController,displayList}

@@ -26,7 +26,7 @@ const Home = () => {
                         <Divider textAlign="left" sx={{ color: '#fff', marginTop: 2 }}>CATEGORIES</Divider>
 
                         {/* Categories Stack */}
-                        <Stack mt={3} spacing={2}>
+                        <Stack mt={3} sx={{border:"red"}} spacing={0}>
                             <Categories/>
                         </Stack>
 

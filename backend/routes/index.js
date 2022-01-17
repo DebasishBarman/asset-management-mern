@@ -5,7 +5,7 @@ var router = express.Router();
 const {register,login}=require('../controller/userController')
 const {addCategory,allCategory}=require('../controller/categoryController')
 const {serviceController,serviceUsers}=require('../controller/serviceUserController')
-const {addAssetDetailController}=require('../controller/assetController')
+const {addAssetDetailController,displayList}=require('../controller/assetController')
 //third-party 
 const {body}=require('express-validator');
 
@@ -57,5 +57,8 @@ router.post('/addAssetInfo',[
   body('assetId').notEmpty().trim().escape(),
 ]
   ,protected,addAssetDetailController);
+
+//display all asset of a particular admin
+router.get('/displayLogs',protected,displayList);
 
 module.exports = router;
