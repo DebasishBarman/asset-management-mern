@@ -154,7 +154,7 @@ const Categories = () => {
     <>
       <Grid container  spacing={1}>
         {categories &&
-          categories.map((category) => {
+          categories.map((category,key) => {
             return (
               <Grid item sx={{}}>
                 <Card

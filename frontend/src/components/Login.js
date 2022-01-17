@@ -35,6 +35,9 @@ const Login = () => {
         setUser({...user,[name]:value}) 
     }
 
+    const signup=()=>{
+        navigate('/signup',{replace:false})
+    }
 
     return (
         <div sx={{ border: '1px solid black' }}>
@@ -61,7 +64,14 @@ const Login = () => {
                         >
                             Log in
                         </Button>
+
+                        <Button variant='outlined' fullWidth sx={{p:2,mt:2}}
+                                onClick={signup}
+                        >
+                            Sign Up
+                        </Button>
                     </Grid>
+                    <a></a>
 
 
                 </Grid>

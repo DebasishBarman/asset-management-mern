@@ -5,9 +5,10 @@ const generateToken=require('../utils/generateToken');
 
 
 const register=async(req,res,next)=>{
-
+    console.log(req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+        console.log(errors)
       return res.status(400).json({ err: "err"});
     }
 

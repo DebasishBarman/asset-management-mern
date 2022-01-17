@@ -8,7 +8,10 @@ import {
   TextField,
   Box,
 } from "@mui/material";
+import axios from 'axios'
+import {useNavigate } from "react-router";
 const SignUp = () => {
+    const navigate=useNavigate()
     const [user,setUser]=useState({
         username:'',
         email:'',
@@ -23,7 +26,34 @@ const SignUp = () => {
     }
 
     const registerHandler=async()=>{
+        try {
+            const passsword=user.password;
+            const confirmPassword=user.confirmPassword;
+            const registerData={
+                username:user.username,
+                email:user.email,
+                password: user.password
+            }
+            console.log(registerData)
+            const config={
+                headers:{
+                    "Content-Type": "application/json"
+                }
 
+            }
+            if(passsword==confirmPassword){
+                const{data}=await axios.post('http://localhost:3001/register',registerData,config);
+                if(data){
+                    alert("Registration Successfull")
+                    navigate('/',{replace:true})
+                }
+            }else{
+                alert("Password do not match.")
+            }
+
+        }catch (e) {
+
+        }
     }
 
 
@@ -40,16 +70,16 @@ const SignUp = () => {
 
         <Grid
           container
-          sx={{ backgroundColor: "yellow", minWidth: "50vw" }}
+          sx={{ backgroundColor: "", minWidth: "50vw" }}
           alignItems="center"
           justifyContent="center"
         >
           <Grid item md={8} sx={{ border: "1px" }}>
-            <Typography sx={{ textAlign: "right" }} variant="h4" component="p">
-              Log In
+            <Typography sx={{ textAlign: "left" }} variant="h4" component="p">
+              Sign up
             </Typography>
             <Typography sx={{ mb: 2 }} variant="subtitle" component="p">
-              Log in to your account
+              Let's create your account
             </Typography>
             <TextField
               sx={{ mb: 2, borderRadius: 10 }}

@@ -1,17 +1,24 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {
     Grid, Stack, Divider, Typography,
 } from '@mui/material'
 
 import Categories from './Categories';
 import Users from './Users';
-
+import jwt_decode from "jwt-decode";
 const Home = () => {
+
     const userInfo = localStorage.getItem("userLogin")
         ? JSON.parse(localStorage.getItem("userLogin"))
         : null;
+    const dec=jwt_decode(userInfo.token)
 
-    console.log(userInfo)
+    console.log(dec)
+    const [user,setUser]=useState("Username")
+
+    useEffect(()=>{
+        setUser(dec.id)
+    },[])
 
     return (
         <>
@@ -23,7 +30,7 @@ const Home = () => {
                                         Welcome
                                     </Typography>
                                     <Typography variant="h4" component="p" sx={{ color: '#fff' }}>
-                                        Hi Debasish
+                                        Hi {user.toUpperCase()}
                                     </Typography>
                                 </Grid>
                             </Grid>
